@@ -7,24 +7,39 @@
 <struts>
 	<!--<constant name="struts.devMode" value="false" /> <constant name="struts.enable.DynamicMethodInvocation" 
 		value="true" /> constant name="struts.objectFactory" value="spring" /> -->
-	<constant name="struts.devMode" value="true"></constant>
-	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
-	<constant name="struts.locale" value="zh_CN"></constant>
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<constant name="struts.objectFactory" value="spring" />
 	<package name="default" namespace="/" extends="struts-default">
 
-		<default-action-ref name="topic" />
+		<default-action-ref name="loginPage" />
+		
+		<global-results>
+            <result name="login">/WEB-INF/views/user/loginPage.jsp</result>
+        </global-results>
+        
+		<!-- 关键地方 struts2.5 为了提升安全性，添加了 allomethod 这么个玩意(使用通配符时用) -->
+		<global-allowed-methods>regex:.*</global-allowed-methods>
 
-
-		<!-- 关键地方 struts2.5 为了提升安全性，添加了 allomethod 这么个玩意(使用通配符时用) 
-		<global-allowed-methods>regex:.*</global-allowed-methods>-->
 
 
 		<!-- 用户模块的Action -->
-		<!-- action name="common_*" class="commonAction" method="{1}"> <result 
-			name="topic">/WEB-INF/views/common/Topic.jsp</result> </action> -->
-		<action name="topic" class="com.cray.action.CommonAction">
-			<result>
+		<action name="common_*" class="commonAction" method="{1}">
+			<result name="topic">
 				/WEB-INF/views/common/Topic.jsp
+			</result>
+		</action>
+
+		<action name="user_*" class="userAction" method="{1}">
+			<result name="loginSuccess">
+				/WEB-INF/views/user/loginSuccess.jsp
+			</result>
+		</action>
+		
+		<!-- 用户模块的Action -->
+		<action name="loginPage" class="userAction" method="loginPage">
+			<result name="loginPage">
+				/WEB-INF/views/user/loginPage.jsp
 			</result>
 		</action>
 	</package>

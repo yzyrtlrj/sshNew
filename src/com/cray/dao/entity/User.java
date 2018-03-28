@@ -9,12 +9,6 @@ public class User implements java.io.Serializable{
 	private String username;
 	private String password;
 
-	//构造方法
-
-	public User() {
-		
-	}
-
 	public Integer getId() {
 		return id;
 	}

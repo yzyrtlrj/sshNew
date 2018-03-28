@@ -10,8 +10,9 @@ import com.opensymphony.xwork2.ActionSupport;
 @Scope("prototype")
 public class CommonAction extends ActionSupport {
 	
-	@Override
-	public String execute() throws Exception {
-		return "success";
+	
+	
+	public String topic() {
+		return "topic";
 	}
 }
